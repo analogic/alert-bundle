@@ -3,15 +3,10 @@ Alert Bundle
 
 Simple symfony bundle for reporting PHP exceptions and JS exceptions to email. It's intended use is for applications running in production
  
-_Notice: Alerter uses internal symfony mailer service, so it must be properly set_
+_Notice: Alert Bundle uses internal symfony mailer service, so it must be properly set_
 
 Documentation
 =============
-
-## Requirements
-
-- Twig
-- Swift Mailer
 
 ## Installation
 
@@ -35,7 +30,7 @@ public function registerBundles()
 }
 ```
 
-## configuration
+## Configuration
 
 ```yaml
 # app/config/config.yml
@@ -53,9 +48,9 @@ analogic_alert:
         - Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
 ```
 
-## javascript errors catching
+## Javascript errors catching
 
-Insert this code to html header
+Insert this code into html header:
 
 ```html
 <!-- base.html.twig -->

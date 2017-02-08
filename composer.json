@@ -1,6 +1,6 @@
 {
   "name": "analogic/alert-bundle",
-  "description": "Symfony bundle for email alerting PHP exceptions and Javascript exceptions",
+  "description": "Simple Symfony bundle for email alerting PHP exceptions and Javascript exceptions",
   "keywords": ["symfony", "bundle", "alert", "exception"],
   "homepage": "https://analogic.cz/",
   "type": "symfony-bundle",
