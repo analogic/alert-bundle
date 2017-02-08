@@ -1,0 +1,39 @@
+{
+  "name": "analogic/alert-bundle",
+  "description": "Symfony bundle for email alerting PHP exceptions and Javascript exceptions",
+  "keywords": ["symfony", "bundle", "alert", "exception"],
+  "homepage": "https://analogic.cz/",
+  "type": "symfony-bundle",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Stanislav Humplik",
+      "email": "sh@analogic.cz"
+    },
+    {
+      "name": "The Community",
+      "homepage": "https://github.com/analogic/alert-bundle"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/analogic/alert-bundle/issues"
+  },
+  "require": {
+    "php": ">=5.3.2",
+    "symfony/framework-bundle": "~3.0",
+    "symfony/twig-bundle": "~3.0",
+    "sensio/framework-extra-bundle": "@stable",
+    "swiftmailer/swiftmailer": "@stable"
+  },
+  "autoload": {
+    "psr-4": { "Analogic\\AlertBundle\\": "" }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0-dev"
+    }
+  },
+  "config": {
+    "bin-dir": "bin"
+  }
+}

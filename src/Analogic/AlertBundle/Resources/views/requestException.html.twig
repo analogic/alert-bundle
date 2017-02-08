@@ -1,0 +1,9 @@
+<h1>Request exception: {{ exception.message }}</h1>
+<a href="{{ url }}">{{ url }}</a>
+<hr />
+<br />
+<strong>{{ exception_class }}</strong><br />
+<pre>{{ exception.traceAsString }}</pre><br />
+<hr />
+<br />
+<pre>{{ dump(request) }}</pre>

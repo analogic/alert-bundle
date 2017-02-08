@@ -1,0 +1,3 @@
+analogic_alert_controllers:
+    resource: '@AnalogicAlertBundle/Controller/'
+    type:     annotation
