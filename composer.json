@@ -19,11 +19,7 @@
     "issues": "https://github.com/analogic/alert-bundle/issues"
   },
   "require": {
-    "php": ">=5.3.2",
-    "symfony/framework-bundle": "~3.0",
-    "symfony/twig-bundle": "~3.0",
-    "sensio/framework-extra-bundle": "@stable",
-    "swiftmailer/swiftmailer": "@stable"
+    "symfony/symfony": "^2.7|^3.1"
   },
   "autoload": {
     "psr-4": { "Analogic\\AlertBundle\\": "" }
