@@ -30,14 +30,7 @@ class ErrorController extends Controller
         $data = json_decode($request->getContent(), true);
         if(empty($data) || !is_array($data)) return new JsonResponse([]);
 
-        /*
-        if(isset($data['message'])) {
-            if(preg_match('~(FoxbrowserToolsLoaded|DealPly)~i', $data['message'])) return new JsonResponse([]);
-        }
-
-        if(!empty($data['file'])) {
-            if(!preg_match('~(satoshibox|onion|satoshicrypt|undefined)~i', $data['file'])) return new JsonResponse([]);
-        }*/
+        // TODO message filters
 
         $this->alerter->javascriptException($request, $data);
 
