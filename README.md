@@ -25,7 +25,7 @@ public function registerBundles()
 {
     $bundles = [
         // ...
-        new Analogic\AlertBundle\AlertBundle(),
+        new Analogic\AlertBundle\AnalogicAlertBundle(),
     ];
 }
 ```
