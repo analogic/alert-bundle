@@ -47,6 +47,13 @@ analogic_alert:
         - Symfony\Component\HttpKernel\Exception\NotFoundHttpException
         - Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
 ```
+You might also want to disable alerts for DEV environment:
+
+```yaml
+# app/config/config_dev.yml
+analogic_alert:
+    enabled: false
+```
 
 ## Javascript errors catching
 
