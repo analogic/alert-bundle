@@ -4,6 +4,8 @@ namespace Analogic\AlertBundle\Alerter;
 
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Event\ConsoleExceptionEvent;
 use Symfony\Component\HttpFoundation\Request;
 
 class Alerter
@@ -25,6 +27,27 @@ class Alerter
         $this->prefix = $prefix;
         $this->logger = $logger;
         $this->templating = $templating;
+    }
+
+    public function customException(string $subject, \Exception $exception)
+    {
+
+    }
+
+    public function commandException(ConsoleExceptionEvent $event)
+    {
+        $exception = $event->getException();
+        $subject = "Command exception: ".$event->getException()->getMessage();
+
+        $message = $this->templating->render(
+            "AnalogicAlertBundle::commandException.html.twig", [
+                'event' => $event,
+                'exception' => $exception,
+                'exception_class' => \get_class($exception)
+            ]
+        );
+
+        $this->mail($subject, $message);
     }
 
     public function requestException(Request $request, \Exception $exception)

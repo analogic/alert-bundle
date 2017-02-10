@@ -8,6 +8,7 @@ services:
           - "%analogic_alert.ignore%"
         tags:
             - { name: kernel.event_listener, event: kernel.exception }
+            - { name: kernel.event_listener, event: console.exception }
 
     analogic_alert_alerter:
         class: Analogic\AlertBundle\Alerter\Alerter
