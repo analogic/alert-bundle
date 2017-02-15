@@ -31,7 +31,14 @@ class Alerter
 
     public function customException(string $subject, \Exception $exception)
     {
+        $message = $this->templating->render(
+            "AnalogicAlertBundle::customException.html.twig", [
+                'exception' => $exception,
+                'exception_class' => \get_class($exception)
+            ]
+        );
 
+        $this->mail($subject, $message);
     }
 
     public function commandException(ConsoleExceptionEvent $event)
@@ -42,6 +49,21 @@ class Alerter
         $message = $this->templating->render(
             "AnalogicAlertBundle::commandException.html.twig", [
                 'event' => $event,
+                'exception' => $exception,
+                'exception_class' => \get_class($exception)
+            ]
+        );
+
+        $this->mail($subject, $message);
+    }
+
+    public function customCommandException(Command $command, \Exception $exception)
+    {
+        $subject = "Command exception: ".$exception->getMessage();
+
+        $message = $this->templating->render(
+            "AnalogicAlertBundle::customCommandException.html.twig", [
+                'command' => $command,
                 'exception' => $exception,
                 'exception_class' => \get_class($exception)
             ]
