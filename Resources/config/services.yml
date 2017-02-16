@@ -25,8 +25,8 @@ services:
         arguments:
           - "@analogic_alert_alerter"
 
-    analogic_alert_javascript_error_helper:
-        class: Analogic\AlertBundle\Twig\JavascriptErrorHelper
+    analogic_alert_helper:
+        class: Analogic\AlertBundle\Twig\Helper
         public: false
         arguments:
           - "%analogic_alert.enabled%"
