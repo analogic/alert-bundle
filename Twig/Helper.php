@@ -30,7 +30,7 @@ class Helper extends \Twig_Extension
 
         return array(
             new \Twig_SimpleFunction('javascript_error_listener', [$this, 'javascriptErrorListener'], ['is_safe' => ['html']]),
-            new \Twig_Function('aDump', 'analogic_dump', array('is_safe' => $isDumpOutputHtmlSafe ? array('html') : array(), 'needs_context' => true, 'needs_environment' => true)),
+            new \Twig_SimpleFunction('aDump', [$this, 'analogicDump'], ['is_safe' => $isDumpOutputHtmlSafe ? array('html') : array(), 'needs_context' => true, 'needs_environment' => true]),
         );
     }
 
@@ -40,25 +40,25 @@ class Helper extends \Twig_Extension
 
         return 'window.onerror=function(c,b,a){var d=new XMLHttpRequest();d.open("POST","'.$this->router->generate('analogic_alert_js_error').'");d.setRequestHeader("Content-Type","application/json;charset=UTF-8");d.send(JSON.stringify({message:c,lineNumber:a,file:b,location:window.location}))};';
     }
-}
 
-function analogic_dump(\Twig_Environment $env, $context, ...$vars)
-{
-    // copied from \Twig_Extension_Debug
-    ob_start();
+    public function analogicDump(\Twig_Environment $env, $context, ...$vars)
+    {
+        // copied from \Twig_Extension_Debug
+        ob_start();
 
-    if (!$vars) {
-        $vars = array();
-        foreach ($context as $key => $value) {
-            if (!$value instanceof \Twig_Template) {
-                $vars[$key] = $value;
+        if (!$vars) {
+            $vars = array();
+            foreach ($context as $key => $value) {
+                if (!$value instanceof \Twig_Template) {
+                    $vars[$key] = $value;
+                }
             }
+
+            var_dump($vars);
+        } else {
+            var_dump(...$vars);
         }
 
-        var_dump($vars);
-    } else {
-        var_dump(...$vars);
+        return ob_get_clean();
     }
-
-    return ob_get_clean();
 }
