@@ -3,3 +3,9 @@
 <br />
 <strong>{{ exception_class }}</strong><br />
 <pre>{{ exception.traceAsString }}</pre><br />
+
+{% if dump_data %}
+    <hr />
+    <br />
+    {{ aDump(dump_data) }}
+{% endif %}
