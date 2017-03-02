@@ -45,7 +45,7 @@ class Alerter
     public function commandException(ConsoleExceptionEvent $event)
     {
         $exception = $event->getException();
-        $subject = "Command exception: ".$event->getException()->getMessage();
+        $subject = "Command exception: ".mb_substr($event->getException()->getMessage(), 0, 32);
 
         $message = $this->templating->render(
             "AnalogicAlertBundle::commandException.html.twig", [
@@ -60,7 +60,7 @@ class Alerter
 
     public function customCommandException(Command $command, \Exception $exception, $dump_data = null)
     {
-        $subject = "Command exception: ".$exception->getMessage();
+        $subject = "Command exception: ".mb_substr($exception->getMessage(), 0, 32);
 
         $message = $this->templating->render(
             "AnalogicAlertBundle::customCommandException.html.twig", [
