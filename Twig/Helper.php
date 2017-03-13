@@ -19,17 +19,6 @@ class Helper extends \Twig_Extension
 
     public function getFunctions()
     {
-        // Copied from \Twig_Extension_Debug
-        // dump is safe if var_dump is overridden by xdebug
-        $isDumpOutputHtmlSafe = extension_loaded('xdebug')
-            // false means that it was not set (and the default is on) or it explicitly enabled
-            && (false === ini_get('xdebug.overload_var_dump') || ini_get('xdebug.overload_var_dump'))
-            // false means that it was not set (and the default is on) or it explicitly enabled
-            // xdebug.overload_var_dump produces HTML only when html_errors is also enabled
-            && (false === ini_get('html_errors') || ini_get('html_errors'))
-            || 'cli' === php_sapi_name()
-        ;
-
         return array(
             new \Twig_SimpleFunction('javascript_error_listener', [$this, 'javascriptErrorListener'], ['is_safe' => ['html']]),
             new \Twig_SimpleFunction('aDump', [$this, 'analogicDump'], ['is_safe' => ['html']])
