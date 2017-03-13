@@ -43,7 +43,7 @@ class Helper extends \Twig_Extension
         return 'window.onerror=function(c,b,a){var d=new XMLHttpRequest();d.open("POST","'.$this->router->generate('analogic_alert_js_error').'");d.setRequestHeader("Content-Type","application/json;charset=UTF-8");d.send(JSON.stringify({message:c,lineNumber:a,file:b,location:window.location}))};';
     }
 
-    public function analogicDump(\Twig_Environment $env, $context, ...$vars)
+    public function analogicDump($vars)
     {
         $cloner = new VarCloner();
         $dumper = new HtmlDumper();
