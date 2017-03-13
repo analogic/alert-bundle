@@ -3,6 +3,8 @@
 namespace Analogic\AlertBundle\Twig;
 
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
+use Symfony\Component\VarDumper\Cloner\VarCloner;
+use Symfony\Component\VarDumper\Dumper\HtmlDumper;
 
 class Helper extends \Twig_Extension
 {
@@ -30,7 +32,7 @@ class Helper extends \Twig_Extension
 
         return array(
             new \Twig_SimpleFunction('javascript_error_listener', [$this, 'javascriptErrorListener'], ['is_safe' => ['html']]),
-            new \Twig_SimpleFunction('aDump', [$this, 'analogicDump'], ['is_safe' => $isDumpOutputHtmlSafe ? array('html') : array(), 'needs_context' => true, 'needs_environment' => true]),
+            new \Twig_SimpleFunction('aDump', [$this, 'analogicDump'], ['is_safe' => ['html']])
         );
     }
 
@@ -43,22 +45,9 @@ class Helper extends \Twig_Extension
 
     public function analogicDump(\Twig_Environment $env, $context, ...$vars)
     {
-        // copied from \Twig_Extension_Debug
-        ob_start();
+        $cloner = new VarCloner();
+        $dumper = new HtmlDumper();
 
-        if (!$vars) {
-            $vars = array();
-            foreach ($context as $key => $value) {
-                if (!$value instanceof \Twig_Template) {
-                    $vars[$key] = $value;
-                }
-            }
-
-            var_dump($vars);
-        } else {
-            var_dump(...$vars);
-        }
-
-        return ob_get_clean();
+        return $dumper->dump($cloner->cloneVar($vars));
     }
 }
