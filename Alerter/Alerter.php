@@ -80,7 +80,9 @@ class Alerter
 
         $message = $this->templating->render(
             "AnalogicAlertBundle::requestException.html.twig", [
-                'url' => ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",
+                'url' => isset($_SERVER[HTTP_HOST]) ? 
+                (((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]") :
+                'console',
                 'request' => $request,
                 'exception' => $exception,
                 'exception_class' => \get_class($exception)
