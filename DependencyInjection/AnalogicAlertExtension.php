@@ -19,6 +19,7 @@ class AnalogicAlertExtension extends Extension
         $container->setParameter($this->getAlias().'.enabled', $config['enabled']);
         $container->setParameter($this->getAlias().'.prefix', $config['prefix']);
         $container->setParameter($this->getAlias().'.ignore', $config['ignore']);
+        $container->setParameter($this->getAlias().'.javascript_ignore_regex', $config['javascript_ignore_regex']);
         $container->setParameter($this->getAlias().'.from', $config['from']);
         $container->setParameter($this->getAlias().'.to', $config['to']);
 

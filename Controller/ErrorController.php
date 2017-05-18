@@ -14,10 +14,12 @@ use Symfony\Component\HttpFoundation\Request;
 class ErrorController extends Controller
 {
     private $alerter;
+    private $javascriptIgnoreRegex;
 
-    public function __construct(Alerter $alerter)
+    public function __construct(Alerter $alerter, ?string $javascriptIgnoreRegex)
     {
         $this->alerter = $alerter;
+        $this->javascriptIgnoreRegex;
     }
 
     /**
@@ -30,7 +32,11 @@ class ErrorController extends Controller
         $data = json_decode($request->getContent(), true);
         if(empty($data) || !is_array($data)) return new JsonResponse([]);
 
-        // TODO message filters
+        $subject = $data['message'];
+        if (!empty($subject) && !empty($this->javascriptIgnoreRegex) && preg_match($this->javascriptIgnoreRegex, $subject)) {
+            // we are ignoring this message
+            return new JsonResponse([]);
+        }
 
         $this->alerter->javascriptException($request, $data);
 

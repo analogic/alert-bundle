@@ -23,6 +23,7 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
                 ->variableNode('to')->defaultValue([])->end()
+                ->variableNode('javascript_ignore_regex')->defaultValue(null)->end()
                 ->variableNode('ignore')->defaultValue([
                     'Symfony\Component\HttpKernel\Exception\NotFoundHttpException',
                     'Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException'
