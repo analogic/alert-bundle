@@ -24,6 +24,7 @@ services:
         class: Analogic\AlertBundle\Controller\ErrorController
         arguments:
           - "@analogic_alert_alerter"
+          - "%analogic_alert.javascript_ignore_regex%"
 
     analogic_alert_helper:
         class: Analogic\AlertBundle\Twig\Helper
