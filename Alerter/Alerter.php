@@ -94,7 +94,7 @@ class Alerter
 
     public function javascriptException(Request $request, array $exceptionData = [])
     {
-        $subject = !empty($exceptionData['message']) ? 'Javascript: '.$exceptionData['message'] : "Javascript error";
+        $subject = !empty($exceptionData['message']) ? 'Javascript: '.$this->truncate($exceptionData['message'], 45) : "Javascript error";
 
         $message = $this->templating->render(
             "AnalogicAlertBundle::javascriptException.html.twig", [
@@ -135,5 +135,21 @@ class Alerter
         } catch (\Exception $e) {
             $this->logger->error('Mailer error: '.$e->getMessage());
         }
+    }
+
+    private function truncate($value, $length = 30, $preserve = false, $separator = '...')
+    {
+        if (mb_strlen($value) > $length) {
+            if ($preserve) {
+                // If breakpoint is on the last word, return the value without separator.
+                if (false === ($breakpoint = mb_strpos($value, ' ', $length))) {
+                    return $value;
+                }
+                $length = $breakpoint;
+            }
+            return rtrim(mb_substr($value, 0, $length)).$separator;
+        }
+
+        return $value;
     }
 }
