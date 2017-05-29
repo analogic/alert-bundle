@@ -32,7 +32,12 @@ class ErrorController extends Controller
         $data = json_decode($request->getContent(), true);
         if(empty($data) || !is_array($data)) return new JsonResponse([]);
 
-        $subject = $data['message'];
+        if(is_array($data['message'])) {
+            $subject = json_encode($data['message']);
+        } else {
+            $subject = $data['message'];
+        }
+
         if (!empty($subject) && !empty($this->javascriptIgnoreRegex) && preg_match($this->javascriptIgnoreRegex, $subject)) {
             // we are ignoring this message
             return new JsonResponse([]);

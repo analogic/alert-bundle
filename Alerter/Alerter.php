@@ -139,6 +139,10 @@ class Alerter
 
     private function truncate($value, $length = 30, $preserve = false, $separator = '...')
     {
+        if(is_array($value)) {
+            $value = implode(', ', $value);
+        }
+
         if (mb_strlen($value) > $length) {
             if ($preserve) {
                 // If breakpoint is on the last word, return the value without separator.
