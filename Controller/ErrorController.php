@@ -38,6 +38,11 @@ class ErrorController extends Controller
             $subject = $data['message'];
         }
 
+        if(preg_match('~(FoxbrowserToolsLoaded|vid_mate_check)~', $subject)) {
+            // we are ignoring this message
+            return new JsonResponse([]);
+        }
+
         if (!empty($subject) && !empty($this->javascriptIgnoreRegex) && preg_match($this->javascriptIgnoreRegex, $subject)) {
             // we are ignoring this message
             return new JsonResponse([]);
