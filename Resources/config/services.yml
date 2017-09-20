@@ -1,17 +1,15 @@
 services:
 
-    analogic_alert_exception_listener:
-        class: Analogic\AlertBundle\EventListener\ExceptionListener
+    Analogic\AlertBundle\EventListener\ExceptionListener:
         arguments:
           - "%analogic_alert.enabled%"
-          - "@analogic_alert_alerter"
+          - '@Analogic\AlertBundle\Alerter\Alerter'
           - "%analogic_alert.ignore%"
         tags:
             - { name: kernel.event_listener, event: kernel.exception }
             - { name: kernel.event_listener, event: console.exception }
 
-    analogic_alert_alerter:
-        class: Analogic\AlertBundle\Alerter\Alerter
+    Analogic\AlertBundle\Alerter\Alerter:
         arguments:
           - "@mailer"
           - "@templating"
@@ -20,14 +18,12 @@ services:
           - "%analogic_alert.to%"
           - "%analogic_alert.prefix%"
 
-    analogic_alert_error_controller:
-        class: Analogic\AlertBundle\Controller\ErrorController
+    Analogic\AlertBundle\Controller\ErrorController:
         arguments:
-          - "@analogic_alert_alerter"
+          - '@Analogic\AlertBundle\Alerter\Alerter'
           - "%analogic_alert.javascript_ignore_regex%"
 
-    analogic_alert_helper:
-        class: Analogic\AlertBundle\Twig\Helper
+    Analogic\AlertBundle\Twig\Helper:
         public: false
         arguments:
           - "%analogic_alert.enabled%"
