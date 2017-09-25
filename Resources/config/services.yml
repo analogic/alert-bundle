@@ -22,6 +22,7 @@ services:
         arguments:
           - '@Analogic\AlertBundle\Alerter\Alerter'
           - "%analogic_alert.javascript_ignore_regex%"
+        tags: ['controller.service_arguments']
 
     Analogic\AlertBundle\Twig\Helper:
         public: false
