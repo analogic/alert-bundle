@@ -19,9 +19,9 @@ services:
           - "%analogic_alert.prefix%"
 
     Analogic\AlertBundle\Controller\ErrorController:
+        autowire: true
         arguments:
-          - '@Analogic\AlertBundle\Alerter\Alerter'
-          - "%analogic_alert.javascript_ignore_regex%"
+          $javascriptIgnoreRegex: "%analogic_alert.javascript_ignore_regex%"
         tags: ['controller.service_arguments']
 
     Analogic\AlertBundle\Twig\Helper:
