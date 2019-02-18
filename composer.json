@@ -20,7 +20,7 @@
   },
   "require": {
     "php": ">=7.1",
-    "symfony/symfony": "^3.3"
+    "symfony/symfony": "*"
   },
   "autoload": {
     "psr-4": { "Analogic\\AlertBundle\\": "" }
