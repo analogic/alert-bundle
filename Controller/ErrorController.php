@@ -5,11 +5,11 @@ namespace Analogic\AlertBundle\Controller;
 use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Analogic\AlertBundle\Alerter\Alerter;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-class ErrorController extends Controller
+class ErrorController extends AbstractController
 {
     private $alerter;
     private $javascriptIgnoreRegex;
