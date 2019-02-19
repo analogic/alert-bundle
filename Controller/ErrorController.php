@@ -3,7 +3,7 @@
 namespace Analogic\AlertBundle\Controller;
 
 use Psr\Cache\CacheItemPoolInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Analogic\AlertBundle\Alerter\Alerter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
