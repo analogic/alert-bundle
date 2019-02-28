@@ -5,6 +5,7 @@ namespace Analogic\AlertBundle\Alerter;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Event\ConsoleErrorEvent;
 use Symfony\Component\Console\Event\ConsoleExceptionEvent;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -52,6 +53,22 @@ class Alerter
                 'event' => $event,
                 'exception' => $exception,
                 'exception_class' => \get_class($exception)
+            ]
+        );
+
+        $this->mail($subject, $message);
+    }
+    
+    public function commandError(ConsoleErrorEvent $event)
+    {
+        $error = $event->getError();
+        $subject = "Command error: ".mb_substr($error->getMessage(), 0, 32);
+
+        $message = $this->templating->render(
+            "AnalogicAlertBundle::commandException.html.twig", [
+                'event' => $event,
+                'exception' => $error,
+                'exception_class' => \get_class($error)
             ]
         );
 
