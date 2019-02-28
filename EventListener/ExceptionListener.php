@@ -48,4 +48,20 @@ class ExceptionListener
 
         $this->alerter->commandException($event);
     }
+    
+    public function onConsoleError(ConsoleErrorEvent $event)
+    {
+        if(!$this->enabled) return;
+
+        $e = $event->getError();
+
+        foreach($this->ignores as $ignore) {
+            if(is_a($e, $ignore)) {
+                return;
+            }
+        }
+
+        $this->alerter->commandError($event);
+    }
+
 }
