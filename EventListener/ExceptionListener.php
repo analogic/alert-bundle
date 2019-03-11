@@ -4,6 +4,7 @@ namespace Analogic\AlertBundle\EventListener;
 
 use Analogic\AlertBundle\Alerter\Alerter;
 use Symfony\Component\Console\Event\ConsoleExceptionEvent;
+use Symfony\Component\Console\Event\ConsoleErrorEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 
 class ExceptionListener
